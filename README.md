@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -11,13 +11,15 @@
     
     <style>
         :root {
-            --primary: #2ecc71;
-            --primary-glow: rgba(46, 204, 113, 0.6);
-            --bg-dark: #050505;
-            --card-bg: rgba(22, 27, 34, 0.7);
-            --text-main: #e6edf3;
-            --text-sub: #8b949e;
-            --gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            /* 浅蓝色系核心变量 */
+            --primary: #00d2ff;       /* 亮青色 */
+            --primary-dark: #3a7bd5;  /* 深蓝色 */
+            --primary-glow: rgba(0, 210, 255, 0.6);
+            --bg-dark: #020c1b;       /* 深海军蓝背景 */
+            --card-bg: rgba(10, 25, 47, 0.75);
+            --text-main: #e6f1ff;
+            --text-sub: #8892b0;
+            --gradient: linear-gradient(135deg, #020c1b, #0a192f, #112240);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,9 +27,10 @@
         body {
             font-family: 'Noto Sans SC', 'JetBrains Mono', sans-serif;
             background: var(--bg-dark);
+            /* 浅蓝色径向光晕背景 */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(46, 204, 113, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(44, 83, 100, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 15% 50%, rgba(0, 210, 255, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(58, 123, 213, 0.12) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -37,15 +40,15 @@
             position: relative;
         }
 
-        /* 动态背景网格 */
+        /* 动态背景网格 - 冰蓝色 */
         body::before {
             content: '';
             position: absolute;
             width: 200%;
             height: 200%;
             background-image: 
-                linear-gradient(rgba(46, 204, 113, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(46, 204, 113, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
             animation: gridMove 20s linear infinite;
@@ -64,23 +67,23 @@
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 210, 255, 0.15); /* 浅蓝边框 */
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 210, 255, 0.1);
             margin: 20px 0;
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease;
         }
 
-        /* 顶部装饰条 */
+        /* 顶部装饰条 - 渐变蓝 */
         .container::top {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            background: linear-gradient(90deg, transparent, var(--primary), var(--primary-dark), transparent);
         }
 
         header {
@@ -101,23 +104,25 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary);
-            box-shadow: 0 0 20px var(--primary-glow);
-            animation: pulse 3s infinite;
+            box-shadow: 0 0 25px var(--primary-glow);
+            animation: pulse-blue 3s infinite;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
         }
 
         h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, var(--primary));
+            /* 文字渐变：白 -> 浅蓝 */
+            background: linear-gradient(to right, #ffffff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
+            text-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
         }
 
         .typing-text {
@@ -125,6 +130,7 @@
             color: var(--primary);
             font-size: 1rem;
             min-height: 1.5em;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
         }
 
         /* 切换按钮组 */
@@ -138,8 +144,8 @@
         }
 
         .btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(46, 204, 113, 0.3);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0, 210, 255, 0.3);
             color: var(--text-sub);
             padding: 10px 24px;
             border-radius: 30px;
@@ -152,18 +158,19 @@
         }
 
         .btn:hover {
-            background: rgba(46, 204, 113, 0.1);
+            background: rgba(0, 210, 255, 0.1);
             border-color: var(--primary);
             color: #fff;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.2);
         }
 
         .btn.active {
             background: var(--primary);
-            color: #000;
+            color: #020c1b; /* 深色文字以保证对比度 */
             border-color: var(--primary);
             font-weight: bold;
-            box-shadow: 0 0 15px var(--primary-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
         }
 
         /* 内容区域 */
@@ -191,11 +198,12 @@
         }
 
         .bio-card {
-            background: rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.02);
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
             border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .bio-list {
@@ -214,6 +222,7 @@
         .bio-list li i {
             color: var(--primary);
             margin-top: 5px;
+            filter: drop-shadow(0 0 5px var(--primary-glow));
         }
 
         .bio-list strong {
@@ -233,6 +242,7 @@
             font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
         }
 
         .skills-grid {
@@ -243,8 +253,8 @@
         }
 
         .skill-item {
-            background: rgba(46, 204, 113, 0.05);
-            border: 1px solid rgba(46, 204, 113, 0.2);
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.2);
             padding: 8px 16px;
             border-radius: 8px;
             color: var(--primary);
@@ -255,9 +265,10 @@
 
         .skill-item:hover {
             background: var(--primary);
-            color: #000;
+            color: #020c1b;
             transform: scale(1.05);
-            box-shadow: 0 0 15px var(--primary-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
+            border-color: var(--primary);
         }
 
         /* 统计图表容器 */
@@ -272,11 +283,14 @@
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
             padding: 10px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
         }
         
         .stats-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);
+            border-color: rgba(0, 210, 255, 0.3);
         }
 
         .stats-card img {
@@ -302,13 +316,14 @@
             color: var(--text-sub);
             font-size: 1.5rem;
             margin: 0 10px;
-            transition: color 0.3s, transform 0.3s;
+            transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
             display: inline-block;
         }
 
         .social-links a:hover {
             color: var(--primary);
             transform: scale(1.2);
+            text-shadow: 0 0 15px var(--primary-glow);
         }
 
         /* 移动端适配 */
@@ -324,8 +339,8 @@
 <div class="container">
     <header>
         <div class="avatar-container">
-            <!-- 这里使用 GitHub 默认头像，你可以替换 src 为你的头像链接 -->
-            <img src="https://avatars.githubusercontent.com/u/RECO?s=400&v=4" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=Huang+Zhiruike&background=2ecc71&color=fff&size=200'">
+            <!-- 自动获取 GitHub 头像 -->
+            <img src="https://avatars.githubusercontent.com/u/RECO?s=400&v=4" alt="Avatar" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=Huang+Zhiruike&background=00d2ff&color=fff&size=200'">
         </div>
         <h1 id="name-title">Huang Zhiruike</h1>
         <div class="typing-text" id="typing-effect"></div>
@@ -344,7 +359,7 @@
         <!-- 中文版 -->
         <div id="zh-content" class="content-section active">
             <div class="bio-card">
-                <h3 style="color: var(--primary); margin-bottom: 10px;"><i class="fas fa-user-graduate"></i> 关于我</h3>
+                <h3 style="color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 10px rgba(0,210,255,0.4);"><i class="fas fa-user-graduate"></i> 关于我</h3>
                 <p>你好！我是黄之睿可，华东政法大学商学院金融专业学生。热爱探索数据背后的逻辑，致力于成为懂技术的金融人。</p>
                 <ul class="bio-list">
                     <li><i class="fas fa-code"></i> <strong>正在钻研：</strong> Python 数据分析、系统设计与量化策略。</li>
@@ -370,10 +385,11 @@
             <h4 class="section-title"><i class="fas fa-chart-bar"></i> 数据概览</h4>
             <div class="stats-grid">
                 <div class="stats-card">
-                    <img src="https://github-readme-stats.vercel.app/api?username=RECO&show_icons=true&theme=gruvbox&locale=zh-CN&title_color=2ecc71&icon_color=2ecc71&bg_color=0d1117&hide_rank=false" alt="Stats">
+                    <!-- 统计图主题改为 blue-green 以匹配浅蓝风格 -->
+                    <img src="https://github-readme-stats.vercel.app/api?username=RECO&show_icons=true&theme=blue-green&locale=zh-CN&title_color=00d2ff&icon_color=00d2ff&bg_color=0a192f&hide_rank=false" alt="Stats">
                 </div>
                 <div class="stats-card">
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=RECO&locale=zh-CN&theme=gruvbox&fire=2ecc71&ring=2ecc71&background=0d1117" alt="Streak">
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=RECO&locale=zh-CN&theme=blue-green&fire=00d2ff&ring=00d2ff&background=0a192f" alt="Streak">
                 </div>
             </div>
         </div>
@@ -381,7 +397,7 @@
         <!-- 英文版 -->
         <div id="en-content" class="content-section">
             <div class="bio-card">
-                <h3 style="color: var(--primary); margin-bottom: 10px;"><i class="fas fa-user-graduate"></i> About Me</h3>
+                <h3 style="color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 10px rgba(0,210,255,0.4);"><i class="fas fa-user-graduate"></i> About Me</h3>
                 <p>Hi! I'm Huang Zhiruike, a Finance major at East China University of Political Science and Law. Passionate about exploring the logic behind data and aspiring to be a finance professional with technical expertise.</p>
                 <ul class="bio-list">
                     <li><i class="fas fa-code"></i> <strong>Working on:</strong> Python Data Analysis, System Design & Quant Strategies.</li>
@@ -407,10 +423,10 @@
             <h4 class="section-title"><i class="fas fa-chart-bar"></i> Statistics</h4>
             <div class="stats-grid">
                 <div class="stats-card">
-                    <img src="https://github-readme-stats.vercel.app/api?username=RECO&show_icons=true&theme=gruvbox&locale=en&title_color=2ecc71&icon_color=2ecc71&bg_color=0d1117&hide_rank=false" alt="Stats">
+                    <img src="https://github-readme-stats.vercel.app/api?username=RECO&show_icons=true&theme=blue-green&locale=en&title_color=00d2ff&icon_color=00d2ff&bg_color=0a192f&hide_rank=false" alt="Stats">
                 </div>
                 <div class="stats-card">
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=RECO&locale=en&theme=gruvbox&fire=2ecc71&ring=2ecc71&background=0d1117" alt="Streak">
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=RECO&locale=en&theme=blue-green&fire=00d2ff&ring=00d2ff&background=0a192f" alt="Streak">
                 </div>
             </div>
         </div>
@@ -423,7 +439,7 @@
             <a href="https://instagram.com/Reco-sea" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://fb.com/Reco Huang" target="_blank"><i class="fab fa-facebook"></i></a>
         </div>
-        <p>&copy; 2026 Huang Zhiruike. Crafted with <i class="fas fa-heart" style="color: var(--primary);"></i> & Code.</p>
+        <p>&copy; 2026 Huang Zhiruike. Crafted with <i class="fas fa-heart" style="color: var(--primary); text-shadow: 0 0 10px var(--primary-glow);"></i> & Code.</p>
     </footer>
 </div>
 
@@ -497,7 +513,7 @@
         // 尝试获取真实头像，如果失败则使用默认
         const img = document.querySelector('.avatar');
         img.onerror = function() {
-            this.src = 'https://ui-avatars.com/api/?name=Huang+Zhiruike&background=2ecc71&color=fff&size=200';
+            this.src = 'https://ui-avatars.com/api/?name=Huang+Zhiruike&background=00d2ff&color=fff&size=200';
         };
     });
 </script>
